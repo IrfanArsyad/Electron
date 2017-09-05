@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mysql Post</title>
+</head>
+
+<script type="text/javascript">
+    function tambah_data() {
+        let mysql = require('mysql');
+
+        let id = document.getElementById("id").value;
+        let nama = document.getElementById("nama").value;
+
+        let connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'khoir',
+            database: 'electron'
+        });
+
+        connection.connect( (err) =>  {
+            if (err) {
+                alert('Koneksi error ' + err);
+            }
+        });
+        connection.query(" insert into belajar1(id,nama) values('" + id + "','" + nama + "') ",  (err, rows) => {
+            if (err) {
+                alert('query error ' + err);
+            }
+            else {
+                alert('Data berhasil ditambahkan');
+            }
+        })
+        connection.end();
+    }
+
+</script>
+
+<body>
+    <input id="id" type="text" name="" placeholder="Masukan Nama">
+    <input id="nama" type="text" name="" placeholder="Masukan Usia"><br>
+    <input onclick="tambah_data()" type="button" name="" value="Simpan Data">
+</body>
+</html>
